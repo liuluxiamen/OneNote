@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>OneNote</title>
+  
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico">
+  <!-- Google Fonts -->
+  <link href='http://fonts.useso.com/css?family=Roboto+Slab:400,700|Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <!-- Animate -->
+  <link rel="stylesheet" href="/css/animate.css">
+  <!-- Flexslider -->
+  <link rel="stylesheet" href="/css/flexslider.css">
+  <!-- Icomoon -->
+  <link rel="stylesheet" href="/css/icomoon.css">
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+  <!-- Modernizr JS -->
+  <script src="/js/modernizr-2.6.2.min.js"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+<script>
+function checkregistername(){
+var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){3,20}$/;
+var fname=document.getElementById("rname");
+var ftname=document.getElementById("srname");
+
+var data = {"username_r":fname.value};
+
+if(fname.value==""|| fname.value.length<3||fname.value.length>20){
+ftname.className="frred";
+ftname.innerHTML="× 请输入4-10位用户名，可包含数字、字母、下划线";
+}
+else{ 
+
+if(fname.value.match(patrn)){
+  $.getJSON("checkUsername_register",data,
+            function(data) {
+              if(data.status)
+              {
+                ftname.className = "frred";
+                ftname.innerHTML = ""+data.msg;
+              }
+              else{
+                ftname.className = "form-advice";
+                ftname.innerHTML = "恭喜，用户名可用";
+              }
+            });
+}
+else{
+ftname.innerHTML="× 用户名格式输入错误，请检查！";
+ftname.className="frred";
+}}
+
+}
+
+function checkregisterpwd()
+{
+var patrn=/^([a-zA-Z0-9]){6,20}$/;
+var fpwd=document.getElementById("rpwd");
+var ftpwd=document.getElementById("srpwd");
+if(fpwd.value==""||fpwd.value.length<6||fpwd.value.length>20){
+ftpwd.className="frred";
+ftpwd.innerHTML="× 格式错误，同时包含数字大写字母小写字母！";
+}
+else{
+
+if(fpwd.value.match(patrn)){
+ftpwd.className="form-advice";
+ftpwd.innerHTML="√密码可用!"
+}
+else
+{
+ftpwd.className="frred";
+ftpwd.innerHTML="× 格式错误，同时包含数字大写字母小写字母！"
+}
+}
+}
+function rcheckpwd(){
+var fpwd=document.getElementById("rpwd");
+var frpwd=document.getElementById("rrpwd");
+var ftrpwd=document.getElementById("srrpwd");
+if(frpwd.value=="")
+{
+ftrpwd.className="frred";
+ftrpwd.innerHTML="× 请输入您的重复密码！"
+}
+else{
+if(frpwd.value!=fpwd.value)
+{
+ftrpwd.className="frred";
+ftrpwd.innerHTML="× 俩次密码输入不一致，请重新输入！";
+}
+else
+{
+ftrpwd.className="form-advice";
+ftrpwd.innerHTML=" √ 密码输入正确"
+}
+}
+}
+function checkloginname()
+{
+  var fname=document.getElementById("lname");
+  var ftname=document.getElementById("slname");
+  var data = {"username_r":fname.value};
+
+if(fname.value=="")
+{
+ftname.className="frred";
+ftname.innerHTML="× 用户名不能为空！"
+}
+else
+{$.getJSON("checkUsername_login",data,
+            function(data) {
+              if(!data.status)
+              {
+                ftname.className = "frred";
+                ftname.innerHTML = ""+data.msg;
+              }
+              else{
+                ftname.className = "form-advice";
+                ftname.innerHTML = "";
+              }
+            });
+}
+
+}
+function checkloginpwd()
+{
+  var fpwd=document.getElementById("lpwd");
+  var ftpwd=document.getElementById("slpwd");
+if(fpwd.value=="")
+{
+ftpwd.className="frred";
+ftpwd.innerHTML="× 密码不能为空！"
+}
+}
+
+</script>
+  </head>
+  <body>
+  
+  <div id="fh5co-header">
+    <div class="container">
+     
+      <!-- Mobile Toggle Menu Button -->
+      <a href="" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+      <div id="fh5co-logo">
+        <a href="index.html">OneNote<span>.</span></a>
+      </div>
+      <nav id="fh5co-main-nav">
+        <ul>
+          <li><a href="#" data-nav-section="home">Home</a></li>
+          <li><a href="#" data-nav-section="login">Login</a></li>
+          <li><a href="#" data-nav-section="register">Register</a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div id="fh5co-main">
+    <div class="fh5co-overlay-mobile"></div>
+    <div id="fh5co-home" class="js-fullheight" data-section="home">
+
+      <div class="flexslider">
+        
+        <div class="fh5co-overlay"></div>
+        <div class="fh5co-text">
+          <div class="container">
+            <div class="row text-center">
+              <h1 class="animate-box">We love to write your story</h1>
+              <div class="fh5co-go animate-box">
+                <a href="#" class="js-fh5co-next">
+                  Login
+                  <span><i class="icon-arrow-down2"></i></span>
+                </a>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+          <ul class="slides">
+          <li style="background-image: url(/images/slide_2.jpg);" data-stellar-background-ratio="0.5"></li>
+          <li style="background-image: url(/images/pic_2.jpg);" data-stellar-background-ratio="0.5"></li>
+          <li style="background-image: url(/images/pic_14.jpg);" data-stellar-background-ratio="0.5"></li>
+          </ul>
+
+      </div>
+    </div>
+        
+        <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+
+    <div id="fh5co-portfolio" data-section="login">
+      <div class="container">
+        <div class="row r-pb">
+          <div class="col-md-8 col-md-offset-2 text-center section-heading">
+            <h2 class="fh5co-section-title animate-box">Login</h2>
+            <div class="col-x8-4 col-x8-offset-4">
+      <form action="/login" method="post">
+        <div class="form-group"></div>
+     <%- message%>
+        <div class="form-group">
+         <input type="text" class="form-control" name="username" placeholder="username" id="lname" onblur="checkloginname()">
+          <span id="slname"></span>
+          <p></p>
+          <input type="password" class="form-control" name="password" id="lpwd" placeholder="password"   onblur="checkloginpwd()">
+          <span id="slpwd"></span>
+        </div>
+          
+        <button type="submit" class="btn btn-default center-block">Login</button>
+      </form>
+    </div>
+          </div>
+        </div>
+        <div class="row"></div>
+      </div>
+    </div>
+
+    <div id="fh5co-about" data-section="register">
+      <div class="container">
+        <div class="row r-pb">
+          <div class="col-md-8 col-md-offset-2 text-center section-heading animate-box">
+            <h2 class="fh5co-section-title">Register</h2>
+            <div calss="row">
+    <div class="col-x8-4 col-x8-offset-4">
+      <form action="/register" method="post">
+    <%- message1 %>
+        <div class="form-group">
+          <input type="text" class="form-control" name="username" placeholder="username" id="rname" onblur="checkregistername()">
+          <span id="srname" class="form-advice">字母开头、数字、下划线的组合，3-20个字符</span>       </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" id="rpwd" placeholder="password" onblur="checkregisterpwd()">
+          <span id="srpwd"  class="form-advice">长度不少于6，同时包含数字，小写字母，大写字母</span>
+        </div>
+          <div class="form-group">
+          <input type="password" class="form-control" name="passwordRepeat" id="rrpwd" placeholder="confirm password" onBlur="rcheckpwd()">
+          <span id="srrpwd"  class="form-advice">重新输入密码</span>
+        </div>
+        <button type="submit" class="btn btn-default center-block">Register</button>
+      </form>
+    </div>
+  </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    
+
+    <div id="fh5co-footer"><p align="center"  ><strong>Copyright OneNote Liulu    </strong></p>
+  </div>
+      <!-- END fh5co-page -->
+        <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+  <!-- jQuery Easing -->
+  <script src="/js/jquery.easing.1.3.js"></script>
+  <!-- Bootstrap -->
+  <script src="/js/bootstrap.min.js"></script>
+  <!-- Waypoints -->
+  <script src="/js/jquery.waypoints.min.js"></script>
+  <!-- Stellar Parallax -->
+  <script src="/js/jquery.stellar.min.js"></script>
+  <!-- Flexslider -->
+  <script src="/js/jquery.flexslider-min.js"></script>
+  <!-- Main JS -->
+  <script src="/js/main.js"></script>
+
+  </body>
+</html>
